@@ -1,0 +1,96 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "EMS.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EMS.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EMS.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EMS.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EMS.Domain/EMS.Domain.csproj",
+      "msbuildProject": "../EMS.Domain/EMS.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "EMS.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Kivindu_PC\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Kivindu_PC\\Desktop\\EmployeeManagementSystem\\EmployeeManagementSystem\\src\\Core\\EMS.Application\\EMS.Application.csproj",
+      "projectName": "EMS.Application",
+      "projectPath": "C:\\Users\\Kivindu_PC\\Desktop\\EmployeeManagementSystem\\EmployeeManagementSystem\\src\\Core\\EMS.Application\\EMS.Application.csproj",
+      "packagesPath": "C:\\Users\\Kivindu_PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kivindu_PC\\Desktop\\EmployeeManagementSystem\\EmployeeManagementSystem\\src\\Core\\EMS.Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Kivindu_PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "C:\\Users\\Kivindu_PC\\Desktop\\EmployeeManagementSystem\\EmployeeManagementSystem\\src\\Core\\EMS.Domain\\EMS.Domain.csproj": {
+              "projectPath": "C:\\Users\\Kivindu_PC\\Desktop\\EmployeeManagementSystem\\EmployeeManagementSystem\\src\\Core\\EMS.Domain\\EMS.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
