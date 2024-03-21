@@ -14,7 +14,6 @@ namespace EMS.Domain.Entities
         {
             EmployeeDepartments = new HashSet<EmployeeDepartment>();
         }
-
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Address { get; set; }

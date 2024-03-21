@@ -31,8 +31,4 @@
     <ProjectReference Include="..\..\Core\EMS.Application\EMS.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Configurations\" />
-  </ItemGroup>
-
 </Project>
