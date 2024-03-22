@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace EMS.API.Controllers
+namespace EMSAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,4 +1,4 @@
-namespace EMS.API
+namespace EMSAPI
 {
     public class WeatherForecast
     {
