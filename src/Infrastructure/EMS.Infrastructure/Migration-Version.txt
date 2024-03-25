@@ -1,5 +1,6 @@
 ﻿Enable-Migrations -Project EMS.Infrastructure -StartUp EMS.API -Verbose
 Add-Migration EMS00001 -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
+Add-Migration EMS00002 -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
 
 Update-Database -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
 

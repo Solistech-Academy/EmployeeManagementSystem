@@ -1,7 +1,10 @@
+using EMS.Application;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddEMSInfrastructureServices(builder.Configuration);
+builder.Services.AddEMSApplicationServices();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
