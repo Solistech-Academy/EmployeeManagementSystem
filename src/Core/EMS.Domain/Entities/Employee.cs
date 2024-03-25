@@ -6,7 +6,7 @@ namespace EMS.Domain.Entities
     {
         public Employee() 
         {
-            EmployeeDepartments = new HashSet<EmployeeDepartment>();
+            EmployeeDepartments = new HashSet<EmployeeDepartment>(); 
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -15,6 +15,7 @@ namespace EMS.Domain.Entities
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreatedDate { get; set; }
+        //navigation property
         public virtual ICollection<EmployeeDepartment> EmployeeDepartments { get; set; }
     }
 }

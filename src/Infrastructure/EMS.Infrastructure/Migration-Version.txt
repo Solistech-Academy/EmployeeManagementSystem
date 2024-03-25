@@ -1,8 +1,8 @@
 ﻿Enable-Migrations -Project EMS.Infrastructure -StartUp EMS.API -Verbose
-Add-Migration EMS00001 -Project EMS.Infrastructure -StartUp EMS.API -Verbose
+Add-Migration EMS00001 -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
 
-Update-Database -Project EMS.Infrastructure -StartUp EMS.API -Verbose
+Update-Database -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
 
-Remove-Migration EMS-Development-365-1 -Project EMS.Infrastructure -StartUp EMS.API -Verbose
+Remove-Migration EMS-Development-365-1 -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
 
-Script-Migration -From EMS00001 -Project EMS.Infrastructure -StartUp EMS.API -Verbose
+Script-Migration -From EMS00001 -Project EMS.Infrastructure -StartUp EMSAPI -Verbose
