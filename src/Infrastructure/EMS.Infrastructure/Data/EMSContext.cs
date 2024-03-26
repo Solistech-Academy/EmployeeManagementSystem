@@ -1,15 +1,18 @@
 ﻿using EMS.Application.Common.Interfaces;
 using EMS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace EMS.Infrastructure.Data
 {
-    public class EMSContext : DbContext , IEMSContext
+    public class EMSContext : DbContext, IEMSContext
     {
-        public EMSContext(DbContextOptions<EMSContext>options):base(options)
+        private IDbContextTransaction dbContextTransaction;
+
+        public EMSContext(DbContextOptions<EMSContext> options) : base(options)
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,26 +29,64 @@ namespace EMS.Infrastructure.Data
 
         public DbSet<EmployeeDepartment> EmployeeDepartments => Set<EmployeeDepartment>();
 
-        public Task BeginTransactionAsync(CancellationToken cancellationToken)
+        public async Task BeginTransactionAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            dbContextTransaction ??= await Database.BeginTransactionAsync(cancellationToken);
         }
 
-        public Task CommitTransactionAsync(CancellationToken cancellationToken)
+        public async Task CommitTransactionAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await SaveChangesAsync(cancellationToken);
+                dbContextTransaction?.CommitAsync(cancellationToken);
+            }
+            catch
+            {
+                await RollbackTransactionAsync(cancellationToken);
+                throw;
+            }
+            finally
+            {
+                if (dbContextTransaction != null)
+                {
+                    DisposeTransaction();
+                }
+            }
         }
 
-        public Task RetryOnExceptionAsync(Func<Task> func)
+        public async Task RetryOnExceptionAsync(Func<Task> func)
         {
-            throw new NotImplementedException();
+            await Database.CreateExecutionStrategy().ExecuteAsync(func);
         }
 
-        public Task RollbackTransactionAsync(CancellationToken cancellationToken)
+        public async Task RollbackTransactionAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await dbContextTransaction?.RollbackAsync(cancellationToken);
+            }
+            finally
+            {
+                DisposeTransaction();
+            }
         }
 
-       
+        private void DisposeTransaction()
+        {
+            try
+            {
+                if (dbContextTransaction != null)
+                {
+                    dbContextTransaction.Dispose();
+                    dbContextTransaction = null;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
     }
 }

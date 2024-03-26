@@ -64,9 +64,10 @@ namespace EMS.Application.PipeLines.Employees.Commands.SaveEmployee
 
                 //add new department, handle deleted departments 
                 var existingDepartments = employee.EmployeeDepartments.ToList();
-                var selectedDepartmentIds = request.EmployeeDTO.Departments.ToList();
+                var selectedDepartmentIds = request.EmployeeDTO.Departments;
                 var newDepartments = selectedDepartmentIds.Except(existingDepartments.Select(x => x.DepartmentId)).ToList();
                 var deletedDepartments = existingDepartments.Where(x => !selectedDepartmentIds.Contains(x.DepartmentId)).ToList();
+                // var deletedDepartments = existingDepartments.Select(x => x.DepartmentId).ToList().Except(selectedDepartmentIds);
 
                 foreach (var deletedDepartment in deletedDepartments)
                 {

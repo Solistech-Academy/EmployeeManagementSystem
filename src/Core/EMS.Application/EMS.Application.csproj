@@ -19,4 +19,8 @@
     <ProjectReference Include="..\EMS.Domain\EMS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PipeLines\Departments\Commands\" />
+  </ItemGroup>
+
 </Project>

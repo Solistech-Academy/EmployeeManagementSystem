@@ -24,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             services.AddTransient<IEMSContext>(provider => provider.GetRequiredService<EMSContext>());
+            services.AddTransient<EMSContextInitialiser>();
 
             services.AddScoped(typeof(IQueryRepository<>), typeof(QueryRepository<>));
             services.AddScoped(typeof(ICommandRepository<>), typeof(CommandRepository<>));
@@ -36,6 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<IDepartmentCommandRepository, DepartmentCommandRepository>();
             services.AddTransient<IEmployeeDepartmentCommandRepository, EmployeeDepartmentCommandRepository>();
+
 
             return services;
         }
