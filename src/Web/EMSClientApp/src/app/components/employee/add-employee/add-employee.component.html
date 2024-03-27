@@ -1,0 +1,49 @@
+<form [formGroup]="employeeDetailForm" (submit)="saveEmployee()" @if(employeeDetailForm)>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input id="firstName" type="text" pInputText />
+      <label for="firstName">First Name</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input id="lastName" type="text" pInputText formControlName="firstName" />
+      <label for="lastName">Last Name</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input id="lastName" type="text" pInputText formControlName="lastName" />
+      <label for="lastName">Last Name</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input id="lastName" type="text" pInputText formControlName="address" />
+      <label for="address">Address</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input
+        id="mobileNumber"
+        type="text"
+        pInputText
+        formControlName="mobileNumber"
+      />
+      <label for="mobileNumber">Mobile Number</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-floatLabel>
+      <input id="email" type="text" pInputText formControlName="email" />
+      <label for="email">Email</label>
+    </p-floatLabel>
+  </div>
+  <div class="mb-3">
+    <p-calendar formControlName="birthday"></p-calendar>
+  </div>
+  <div class="mb-3">
+    <p-multiSelect [options]="departments" formControlName="departments" optionLabel="departments"></p-multiSelect>
+  </div>
+</form>

@@ -2,7 +2,7 @@
 
 namespace EMS.Application.DTOs.CommonDTOs
 {
-    public class EmployeeFilterDTO : BaseDTO
+    public class EmployeeFilterDTO
     {
         public string Name { get; set; }
         public int DepartmentId { get; set; }

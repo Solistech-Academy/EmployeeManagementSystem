@@ -41,7 +41,7 @@ namespace EMSAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("filterEmployees")]
+        [HttpGet("getEmployeeByFilter")]
         public async Task<IActionResult> GetEmployeeByFilter([FromQuery] EmployeeFilterDTO employeeFilterDTO)
         {
             var response = await _mediator.Send(new GetEmployeesByFilterQuery(employeeFilterDTO));
