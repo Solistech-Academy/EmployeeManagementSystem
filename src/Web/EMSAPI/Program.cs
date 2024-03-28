@@ -7,11 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEMSInfrastructureServices(builder.Configuration);
 builder.Services.AddEMSApplicationServices();
 
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -32,6 +33,12 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials());
 
 app.MapControllers();
 

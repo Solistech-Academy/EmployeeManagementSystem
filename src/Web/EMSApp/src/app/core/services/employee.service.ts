@@ -56,4 +56,22 @@ export class EmployeeService {
         .toPromise();
     } catch (error) {}
   }
+
+  async validateMobileNumber(mobileNumber: String): Promise<Boolean> {
+    try {
+      return await this._httpClient
+        .get<Boolean>(
+          `${this.baseUrl}Employee/validateMobileNumber?mobileNumber=${mobileNumber}`
+        )
+        .toPromise();
+    } catch (error) {}
+  }
+
+  async validateEmail(email: String): Promise<Boolean> {
+    try {
+      return await this._httpClient
+        .get<Boolean>(`${this.baseUrl}Employee/validateEmail?email=${email}`)
+        .toPromise();
+    } catch (error) {}
+  }
 }

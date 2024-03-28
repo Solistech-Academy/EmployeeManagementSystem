@@ -39,14 +39,15 @@ namespace EMS.Application.PipeLines.Employees.Commands.SaveEmployee
                     Address = request.EmployeeDTO.Address,
                     MobileNumber = request.EmployeeDTO.MobileNumber,
                     Email = request.EmployeeDTO.Email,
-                    Birthday = request.EmployeeDTO.Birthday
+                    Birthday = request.EmployeeDTO.Birthday,
+                    IsActive = true,
+                    CreatedDate = DateTime.UtcNow,
 
                 };
 
                 AddNewDepartments(employee, request.EmployeeDTO.Departments);
 
                 await _employeeCommandRepository.AddAsync(employee, cancellationToken);
-
                 return ResultDTO.Success(ResponseMessageConstant.EMPLOYEE_SAVE_SUCCESS_MESSAGE, employee.Id);
             }
             else

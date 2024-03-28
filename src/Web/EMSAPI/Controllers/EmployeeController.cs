@@ -4,6 +4,8 @@ using EMS.Application.PipeLines.Employees.Commands.DeactivateEmplyee;
 using EMS.Application.PipeLines.Employees.Commands.SaveEmployee;
 using EMS.Application.PipeLines.Employees.Queries.GetEmployeeById;
 using EMS.Application.PipeLines.Employees.Queries.GetEmployeesByFilter;
+using EMS.Application.PipeLines.Employees.Queries.ValidateExistEmployeeEmail;
+using EMS.Application.PipeLines.Employees.Queries.ValidateExistEmployeeMobileNumber;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +47,19 @@ namespace EMSAPI.Controllers
         public async Task<IActionResult> GetEmployeeByFilter([FromQuery] EmployeeFilterDTO employeeFilterDTO)
         {
             var response = await _mediator.Send(new GetEmployeesByFilterQuery(employeeFilterDTO));
+            return Ok(response);
+        }
+
+        [HttpGet("validateMobileNumber")]
+        public async Task<IActionResult> ValidateMobileNumber(string mobileNumber)
+        {
+            var response = await _mediator.Send(new ValidateExistEmployeeMobileNumberQuery(mobileNumber));
+            return Ok(response);
+        }
+        [HttpGet("validateEmail")]
+        public async Task<IActionResult> ValidateEmail(string email)
+        {
+            var response = await _mediator.Send(new ValidateExistEmployeeEmailQuery(email));
             return Ok(response);
         }
 

@@ -12,7 +12,7 @@ export class DepartmentService {
   constructor(private _httpClient: HttpClient) {}
   async getDepartmentMasterData(): Promise<DropDownModel[]> {
     return await this._httpClient
-      .get<DropDownModel[]>(`${this.baseUrl}getDepartmentMasterData`)
+      .get<DropDownModel[]>(`${this.baseUrl}Department/getDepartmentMasterData`)
       .toPromise();
   }
 }

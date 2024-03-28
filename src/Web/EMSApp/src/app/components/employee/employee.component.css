@@ -1,0 +1,5 @@
+.employee-form {
+  max-width: 400px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding around the form */
+}
