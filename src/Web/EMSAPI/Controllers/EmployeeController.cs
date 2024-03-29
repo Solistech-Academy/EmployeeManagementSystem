@@ -3,6 +3,7 @@ using EMS.Application.DTOs.EmployeeDTOs;
 using EMS.Application.PipeLines.Employees.Commands.DeactivateEmplyee;
 using EMS.Application.PipeLines.Employees.Commands.SaveEmployee;
 using EMS.Application.PipeLines.Employees.Queries.GetEmployeeById;
+using EMS.Application.PipeLines.Employees.Queries.GetEmployeeMasterData;
 using EMS.Application.PipeLines.Employees.Queries.GetEmployeesByFilter;
 using EMS.Application.PipeLines.Employees.Queries.ValidateExistEmployeeEmail;
 using EMS.Application.PipeLines.Employees.Queries.ValidateExistEmployeeMobileNumber;
@@ -60,6 +61,12 @@ namespace EMSAPI.Controllers
         public async Task<IActionResult> ValidateEmail(string email)
         {
             var response = await _mediator.Send(new ValidateExistEmployeeEmailQuery(email));
+            return Ok(response);
+        }
+        [HttpGet("getEmployeeMasterData")]
+        public async Task<IActionResult> GetEmployeeMasterData()
+        {
+            var response = await _mediator.Send(new GetEmployeeMasterDataQuery());
             return Ok(response);
         }
 
