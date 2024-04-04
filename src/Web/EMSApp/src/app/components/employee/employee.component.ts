@@ -4,7 +4,7 @@ import { DropDownModel } from '../../core/models/common/drop.down.model';
 import { EmployeeService } from '../../core/services/employee.service';
 import { DepartmentService } from '../../core/services/department.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-employee',
@@ -14,15 +14,23 @@ import { Router } from '@angular/router';
 export class EmployeeComponent {
 	employeeDetailForm: UntypedFormGroup;
 	departments: DropDownModel[];
+	id: number;
+	isUpdate: boolean = false;
 	constructor(
 		private employeeService: EmployeeService,
 		private untypedFormBuilder: UntypedFormBuilder,
 		private departmentService: DepartmentService,
 		private toastr: ToastrService,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) {}
 	ngOnInit() {
 		this.getDepartmentMasterData();
+		this.id = +this.route.snapshot.paramMap.get('id');
+		if (this.id !== 0) {
+			this.isUpdate = true;
+			this.getEmployeeById();
+		}
 	}
 	async getDepartmentMasterData(): Promise<void> {
 		try {
@@ -94,7 +102,28 @@ export class EmployeeComponent {
 	get emailFormControl(): AbstractControl {
 		return this.employeeDetailForm.get('email');
 	}
+
 	get mobileNumberFormControl(): AbstractControl {
 		return this.employeeDetailForm.get('mobileNumber');
+	}
+
+	async getEmployeeById(): Promise<void> {
+		try {
+			let response = await this.employeeService.getEmployeeById(this.id);
+			console.log('Employee data:', response);
+			this.employeeDetailForm.patchValue({
+				id: this.id,
+				firstName: response.firstName,
+				lastName: response.lastName,
+				address: response.address,
+				mobileNumber: response.mobileNumber,
+				email: response.email,
+				birthday: new Date(response.birthday),
+				isActive: response.isActive,
+				departments: response.departments,
+			});
+		} catch (error) {
+			console.error('Error fetching employee data:', error);
+		}
 	}
 }

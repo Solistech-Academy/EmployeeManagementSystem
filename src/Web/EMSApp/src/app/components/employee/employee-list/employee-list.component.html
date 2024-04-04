@@ -1,120 +1,134 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md mt-2">
-			<label for="Name" class="ml-4">Name</label>
-			<input
-				id="Name"
-				type="text"
-				pInputText
-				class="form-control p-inputtext-sm"
-				[style]="{ width: '100%', height: '60%' }"
-				[(ngModel)]="name"
-				[ngModelOptions]="{ standalone: true }"
-			/>
-		</div>
-		<div class="col-md mt-2">
-			<label for="departments">Departments</label><br />
-			<p-dropdown
-				[style]="{ width: '100%', height: '60%' }"
-				class="p-inputtext-sm"
-				[options]="listOfDepartments"
-				optionLabel="name"
-				optionValue="id"
-				[(ngModel)]="departmentId"
-				[ngModelOptions]="{ standalone: true }"
-			>
-				<div [style]="{ width: '100%' }">
-					<ng-template let-item pTemplate="item">
-						{{ item.name }}
-					</ng-template>
+<div class="container-fluid">
+	<div class="card mt-4">
+		<div class="card-header">
+			<div class="row" style="margin: 0; text-align: center">
+				<div class="col-md mt-2">
+					<label for="Name" class="ml-4">Name</label>
+					<input
+						id="Name"
+						type="text"
+						pInputText
+						class="form-control p-inputtext-sm"
+						[style]="{ width: '100%', height: '60%' }"
+						[(ngModel)]="name"
+						[ngModelOptions]="{ standalone: true }"
+					/>
 				</div>
-			</p-dropdown>
-		</div>
-		<div class="col-md mt-2">
-			<label for="activeStatus">Active Status</label><br />
-			<p-dropdown
-				[style]="{ width: '100%', height: '60%' }"
-				class="p-inputtext-sm"
-				[options]="activeStatus"
-				optionLabel="name"
-				optionValue="id"
-				[(ngModel)]="employeeStatus"
-				[ngModelOptions]="{ standalone: true }"
-			>
-				<div [style]="{ width: '100%' }">
-					<ng-template let-item pTemplate="item">
-						{{ item.name }}
-					</ng-template>
+				<div class="col-md mt-2">
+					<label for="departments">Departments</label><br />
+					<p-dropdown
+						[style]="{ width: '100%', height: '60%' }"
+						class="p-inputtext-sm"
+						[options]="listOfDepartments"
+						optionLabel="name"
+						optionValue="id"
+						[(ngModel)]="departmentId"
+						[ngModelOptions]="{ standalone: true }"
+					>
+						<div [style]="{ width: '100%' }">
+							<ng-template let-item pTemplate="item">
+								{{ item.name }}
+							</ng-template>
+						</div>
+					</p-dropdown>
 				</div>
-			</p-dropdown>
-		</div>
-		<div class="col mt-4 d-flex align-items-center">
-			<div class="ml-auto">
-				<button class="btn btn-primary" (click)="getFilteredEmployees()">Filter</button>
+				<div class="col-md mt-2">
+					<label for="activeStatus">Active Status</label><br />
+					<p-dropdown
+						[style]="{ width: '100%', height: '60%' }"
+						class="p-inputtext-sm"
+						[options]="activeStatus"
+						optionLabel="name"
+						optionValue="id"
+						[(ngModel)]="employeeStatus"
+						[ngModelOptions]="{ standalone: true }"
+					>
+						<div [style]="{ width: '100%' }">
+							<ng-template let-item pTemplate="item">
+								{{ item.name }}
+							</ng-template>
+						</div>
+					</p-dropdown>
+				</div>
+				<div class="col mt-4 d-flex align-items-center">
+					<div class="ml-auto">
+						<button class="btn btn-primary" (click)="getFilteredEmployees()">Filter</button>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<p-toolbar styleClass="mb-4 gap-2">
-	<ng-template pTemplate="left">
-		<button
-			pButton
-			pRipple
-			label="New"
-			icon="pi pi-plus"
-			class="p-button-success mr-2"
-			(click)="navigateToAddEmployee()"
-		></button>
-	</ng-template>
-</p-toolbar>
-<div>
-	<div style="margin: 0 auto; text-align: center; width: 100%" class="pt-4">
-		<p-table
-			[value]="listOfEmployees"
-			[tableStyle]="{ 'min-width': '50rem', width: '100%', margin: '0 auto' }"
-			styleClass="p-datatable-gridlines p-datatable-sm"
-			selectionMode="single"
-			[paginator]="true"
-			[showCurrentPageReport]="true"
-			[responsive]="true"
-			[rows]="pageSize"
-			[(first)]="currentPage"
-			[lazy]="true"
-			[totalRecords]="totalRecordCount"
-			(onLazyLoad)="loadEmployees($event)"
-			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-			[rowsPerPageOptions]="[10, 20, 50]"
-		>
-			<ng-template pTemplate="header">
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile Number</th>
-					<th>Address</th>
-					<th>Date Of Birth</th>
-					<th>Actions</th>
-				</tr>
-			</ng-template>
+		<div class="card-body">
+			<div style="margin: 0 auto; text-align: center; width: 100%" class="pt-4">
+				<p-table
+					class="table"
+					[value]="listOfEmployees"
+					[tableStyle]="{ width: '85%', margin: '0 auto' }"
+					styleClass="p-datatable-gridlines p-datatable-sm"
+					selectionMode="single"
+					[paginator]="true"
+					[showCurrentPageReport]="true"
+					[responsive]="true"
+					[rows]="pageSize"
+					[(first)]="currentPage"
+					[lazy]="true"
+					[totalRecords]="totalRecordCount"
+					(onLazyLoad)="loadEmployees($event)"
+					currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+					[rowsPerPageOptions]="[10, 20, 50]"
+				>
+					<ng-template pTemplate="header">
+						<tr>
+							<th>
+								<button
+									pButton
+									pRipple
+									label="New"
+									icon="pi pi-plus"
+									class="p-button-success"
+									(click)="navigateToAddEmployee()"
+								></button>
+							</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile Number</th>
+							<th>Address</th>
+							<th>Date Of Birth</th>
+						</tr>
+					</ng-template>
 
-			<ng-template pTemplate="body" let-rawData>
-				<tr>
-					<td style="margin: 0 auto; text-align: center">{{ rawData.firstName }} {{ rawData.lastName }}</td>
-					<td style="margin: 0 auto; text-align: center">{{ rawData.email }}</td>
-					<td style="margin: 0 auto; text-align: center">{{ rawData.mobileNumber }}</td>
-					<td style="margin: 0 auto; text-align: center">{{ rawData.address }}</td>
-					<td style="margin: 0 auto; text-align: center">{{ rawData.birthday }}</td>
-					<td>
-						<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
-						<button
-							pButton
-							pRipple
-							icon="pi pi-trash"
-							class="p-button-rounded p-button-warning"
-							(click)="deleteEmployee(rawData.id)"
-						></button>
-					</td>
-				</tr>
-			</ng-template>
-		</p-table>
+					<ng-template pTemplate="body" let-rawData>
+						<tr>
+							<td style="margin: 0 auto; text-align: center">
+								<div style="display: inline-block; padding-right: 10px">
+									<button
+										pButton
+										pRipple
+										icon="pi pi-pencil"
+										class="p-button-rounded p-button-success mr-2"
+										(click)="updateEmployee(rawData.id)"
+									></button>
+								</div>
+								<div style="display: inline-block">
+									<button
+										pButton
+										pRipple
+										icon="pi pi-trash"
+										class="p-button-rounded p-button-warning"
+										(click)="deleteEmployee(rawData.id)"
+										[disabled]="rawData.isActive === false"
+									></button>
+								</div>
+							</td>
+
+							<td style="margin: 0 auto; text-align: center">{{ rawData.firstName }} {{ rawData.lastName }}</td>
+							<td style="margin: 0 auto; text-align: center">{{ rawData.email }}</td>
+							<td style="margin: 0 auto; text-align: center">{{ rawData.mobileNumber }}</td>
+							<td style="margin: 0 auto; text-align: center">{{ rawData.address }}</td>
+							<td style="margin: 0 auto; text-align: center">{{ formatDate(rawData.birthday) }}</td>
+						</tr>
+					</ng-template>
+				</p-table>
+			</div>
+		</div>
 	</div>
 </div>
