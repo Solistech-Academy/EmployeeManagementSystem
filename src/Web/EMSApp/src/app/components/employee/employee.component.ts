@@ -91,12 +91,16 @@ export class EmployeeComponent {
 	async saveEmployee() {
 		try {
 			const result = await this.employeeService.saveEmployee(this.employeeDetailForm.getRawValue());
-			this.toastr.success('Employee saved successfully', 'Success');
-			console.log('Employee saved successfully:', result);
-			this.router.navigateByUrl('/');
-		} catch (error) {
-			console.error('Error saving employee:', error);
-		}
+			if (result.succeeded) {
+				this.toastr.success(result.successMessage, 'Success');
+				//console.log('Employee saved successfully:', result);
+				this.router.navigateByUrl('/');
+			} else {
+				result.errors.forEach((message) => {
+					this.toastr.error(message, 'Error');
+				});
+			}
+		} catch (error) {}
 	}
 
 	get emailFormControl(): AbstractControl {
@@ -123,7 +127,7 @@ export class EmployeeComponent {
 				departments: response.departments,
 			});
 		} catch (error) {
-			console.error('Error fetching employee data:', error);
+			//console.error('Error fetching employee data:', error);
 		}
 	}
 }

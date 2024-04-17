@@ -33,7 +33,7 @@ namespace EMSAPI.Controllers
         [HttpGet("getEmployeeById/{id}")]
         public async Task<IActionResult> GetEmployeeById(int id)
         {
-            var response = await _mediator.Send(new GetEmployeeByIdCommand(id));
+            var response = await _mediator.Send(new GetEmployeeByIdQuery(id));
             return Ok(response);
         }
 

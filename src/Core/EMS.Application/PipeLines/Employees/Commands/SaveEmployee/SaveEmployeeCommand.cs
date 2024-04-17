@@ -32,18 +32,9 @@ namespace EMS.Application.PipeLines.Employees.Commands.SaveEmployee
             if (employee is null)
             {
                 //add employee basic details
-                employee = new Employee
-                {
-                    FirstName = request.EmployeeDTO.FirstName,
-                    LastName = request.EmployeeDTO.LastName,
-                    Address = request.EmployeeDTO.Address,
-                    MobileNumber = request.EmployeeDTO.MobileNumber,
-                    Email = request.EmployeeDTO.Email,
-                    Birthday = request.EmployeeDTO.Birthday,
-                    IsActive = true,
-                    CreatedDate = DateTime.UtcNow,
-
-                };
+                employee = request.EmployeeDTO.ToEntity();
+                employee.IsActive = true;
+                employee.CreatedDate = DateTime.UtcNow;
 
                 AddNewDepartments(employee, request.EmployeeDTO.Departments);
 
@@ -53,22 +44,12 @@ namespace EMS.Application.PipeLines.Employees.Commands.SaveEmployee
             else
             {
                 // update  employee details
-
-
-                employee.FirstName = request.EmployeeDTO.FirstName;
-                employee.LastName = request.EmployeeDTO.LastName;
-                employee.Address = request.EmployeeDTO.Address;
-                employee.MobileNumber = request.EmployeeDTO.MobileNumber;
-                employee.Email = request.EmployeeDTO.Email;
-                employee.Birthday = request.EmployeeDTO.Birthday;
-
-
+                employee = request.EmployeeDTO.ToEntity(employee);
                 //add new department, handle deleted departments 
                 var existingDepartments = employee.EmployeeDepartments.ToList();
                 var selectedDepartmentIds = request.EmployeeDTO.Departments;
                 var newDepartments = selectedDepartmentIds.Except(existingDepartments.Select(x => x.DepartmentId)).ToList();
                 var deletedDepartments = existingDepartments.Where(x => !selectedDepartmentIds.Contains(x.DepartmentId)).ToList();
-                // var deletedDepartments = existingDepartments.Select(x => x.DepartmentId).ToList().Except(selectedDepartmentIds);
 
                 foreach (var deletedDepartment in deletedDepartments)
                 {

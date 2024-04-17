@@ -26,7 +26,7 @@ namespace EMS.Application.PipeLines.Employees.Commands.DeactivateEmplyee
 
             await _employeeCommandRepository.UpdateAsync(employee, cancellationToken);
 
-            return ResultDTO.Success(ResponseMessageConstant.EMPLOYEEDEACTIVATE_SUCCESS_MESSAGE);
+            return ResultDTO.Success(ResponseMessageConstant.EMPLOYEE_DEACTIVATE_SUCCESS_MESSAGE);
 
         }
     }

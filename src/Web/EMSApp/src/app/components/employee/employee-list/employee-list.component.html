@@ -1,3 +1,5 @@
+<p-confirmDialog [style]="{ width: '40vw' }"></p-confirmDialog>
+
 <div class="container-fluid">
 	<div class="card mt-4">
 		<div class="card-header">
@@ -12,6 +14,7 @@
 						[style]="{ width: '100%', height: '60%' }"
 						[(ngModel)]="name"
 						[ngModelOptions]="{ standalone: true }"
+						placeholder="Search by Name"
 					/>
 				</div>
 				<div class="col-md mt-2">
@@ -52,7 +55,7 @@
 				</div>
 				<div class="col mt-4 d-flex align-items-center">
 					<div class="ml-auto">
-						<button class="btn btn-primary" (click)="getFilteredEmployees()">Filter</button>
+						<button class="btn btn-primary no-radius" (click)="getFilteredEmployees()">Filter</button>
 					</div>
 				</div>
 			</div>
@@ -114,7 +117,7 @@
 										pRipple
 										icon="pi pi-trash"
 										class="p-button-rounded p-button-warning"
-										(click)="deleteEmployee(rawData.id)"
+										(click)="confirmDelete(rawData.id)"
 										[disabled]="rawData.isActive === false"
 									></button>
 								</div>

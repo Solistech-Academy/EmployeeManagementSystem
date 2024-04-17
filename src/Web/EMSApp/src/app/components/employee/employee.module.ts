@@ -12,9 +12,16 @@ import { TableModule } from 'primeng/table';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToolbarModule } from 'primeng/toolbar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { ConfirmationDialogComponent } from './employee-list/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
-	declarations: [EmployeeComponent, EmployeeListComponent],
+	declarations: [EmployeeComponent, EmployeeListComponent, ConfirmationDialogComponent],
+	providers: [ConfirmationService],
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
@@ -27,6 +34,9 @@ import { ToolbarModule } from 'primeng/toolbar';
 		TableModule,
 		DropdownModule,
 		ToolbarModule,
+		InputMaskModule,
+		MatDialogModule,
+		ConfirmDialogModule,
 	],
 	exports: [EmployeeComponent],
 })

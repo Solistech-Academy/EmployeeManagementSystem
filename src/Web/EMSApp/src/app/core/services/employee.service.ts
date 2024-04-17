@@ -6,6 +6,7 @@ import { ResultModel } from '../models/common/result.model';
 import { EmployeeFilterModel } from '../models/employee/employee.filter.model';
 import { PaginatedEmployeeModel } from '../models/employee/paginated.employee.model';
 import { EmployeeMasterDataModel } from './../models/employee/employee.master.data.model';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -17,55 +18,56 @@ export class EmployeeService {
 
 	async saveEmployee(employee: EmployeeModel): Promise<ResultModel> {
 		try {
-			return await this._httpClient.post<ResultModel>(`${this.baseUrl}Employee/saveEmployee`, employee).toPromise();
+			return await firstValueFrom(this._httpClient.post<ResultModel>(`${this.baseUrl}Employee/saveEmployee`, employee));
 		} catch (error) {}
 	}
 
 	async getEmployeeById(id: number): Promise<EmployeeModel> {
 		try {
-			return await this._httpClient.get<EmployeeModel>(`${this.baseUrl}Employee/getEmployeeById/${id}`).toPromise();
+			return await firstValueFrom(this._httpClient.get<EmployeeModel>(`${this.baseUrl}Employee/getEmployeeById/${id}`));
 		} catch (error) {}
 	}
 
 	async deactivateEmployee(id: number): Promise<ResultModel> {
 		try {
-			return await this._httpClient.delete<ResultModel>(`${this.baseUrl}Employee/deactivateEmployee/${id}`).toPromise();
+			return await firstValueFrom(
+				this._httpClient.delete<ResultModel>(`${this.baseUrl}Employee/deactivateEmployee/${id}`)
+			);
 		} catch (error) {}
 	}
 
 	async getEmployeeByFilter(employeeFilter: EmployeeFilterModel): Promise<PaginatedEmployeeModel> {
 		try {
-			console.log(employeeFilter);
 			const params = new HttpParams()
 				.set('Name', employeeFilter.name != undefined ? employeeFilter.name.toString() : '')
 				.set('DepartmentId', employeeFilter.departmentId.toString())
 				.set('EmployeeStatus', employeeFilter.employeeStatus.toString())
 				.set('PageSize', employeeFilter.pageSize.toString())
 				.set('CurrentPage', employeeFilter.currentPage.toString());
-			return await this._httpClient
-				.get<PaginatedEmployeeModel>(`${this.baseUrl}Employee/getEmployeeByFilter/`, { params })
-				.toPromise();
-		} catch (error) {
-			console.log(error);
-		}
+			return await firstValueFrom(
+				this._httpClient.get<PaginatedEmployeeModel>(`${this.baseUrl}Employee/getEmployeeByFilter/`, { params })
+			);
+		} catch (error) {}
 	}
 
 	async validateMobileNumber(mobileNumber: String): Promise<Boolean> {
 		try {
-			return await this._httpClient
-				.get<Boolean>(`${this.baseUrl}Employee/validateMobileNumber?mobileNumber=${mobileNumber}`)
-				.toPromise();
+			return await firstValueFrom(
+				this._httpClient.get<Boolean>(`${this.baseUrl}Employee/validateMobileNumber?mobileNumber=${mobileNumber}`)
+			);
 		} catch (error) {}
 	}
 
 	async validateEmail(email: String): Promise<Boolean> {
 		try {
-			return await this._httpClient.get<Boolean>(`${this.baseUrl}Employee/validateEmail?email=${email}`).toPromise();
+			return await firstValueFrom(
+				this._httpClient.get<Boolean>(`${this.baseUrl}Employee/validateEmail?email=${email}`)
+			);
 		} catch (error) {}
 	}
 	async getEmployeeMasterData(): Promise<EmployeeMasterDataModel> {
-		return await this._httpClient
-			.get<EmployeeMasterDataModel>(`${this.baseUrl}Employee/getEmployeeMasterData`)
-			.toPromise();
+		return await firstValueFrom(
+			this._httpClient.get<EmployeeMasterDataModel>(`${this.baseUrl}Employee/getEmployeeMasterData`)
+		);
 	}
 }

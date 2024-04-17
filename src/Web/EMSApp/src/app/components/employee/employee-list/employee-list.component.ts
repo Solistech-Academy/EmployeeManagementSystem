@@ -6,7 +6,9 @@ import { EmployeeModel } from '../../../core/models/employee/employee.model';
 import { TableLazyLoadEvent } from 'primeng/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-//import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
+
 @Component({
 	selector: 'app-employee-list',
 	templateUrl: './employee-list.component.html',
@@ -26,7 +28,13 @@ export class EmployeeListComponent {
 	pageSize: number = 20;
 	currentPage: number = 0;
 
-	constructor(private employeeService: EmployeeService, private router: Router, private toastr: ToastrService) {
+	constructor(
+		private employeeService: EmployeeService,
+		private router: Router,
+		private toastr: ToastrService,
+		private confirmationService: ConfirmationService,
+		private primengConfig: PrimeNGConfig
+	) {
 		this.getEmployeeMasterData();
 	}
 
@@ -51,7 +59,7 @@ export class EmployeeListComponent {
 	async getEmployeeMasterData(): Promise<void> {
 		try {
 			let response = await this.employeeService.getEmployeeMasterData();
-			this.listOfDepartments = response.listOfDepartments;
+			this.listOfDepartments = [{ id: 0, name: 'All' }, ...response.listOfDepartments];
 			this.activeStatus = response.activeStatus;
 		} catch (error) {}
 	}
@@ -81,8 +89,22 @@ export class EmployeeListComponent {
 					this.toastr.error(message, 'Error');
 				});
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.error(error);
+		}
 	}
+
+	confirmDelete(employeeId: number): void {
+		this.confirmationService.confirm({
+			message: 'Are you sure you want to delete this employee?',
+			header: 'Confirmation',
+			icon: 'pi pi-exclamation-triangle',
+			accept: () => {
+				this.deleteEmployee(employeeId);
+			},
+		});
+	}
+
 	async navigateToAddEmployee() {
 		this.router.navigateByUrl('/add');
 	}

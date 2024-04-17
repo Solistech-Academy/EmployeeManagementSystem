@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
 	declarations: [AppComponent, AppLayoutComponent, HeaderComponent, FooterComponent],
@@ -24,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
 		ToolbarModule,
 		ButtonModule,
 	],
-	providers: [],
+	providers: [provideAnimationsAsync()],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
