@@ -1,0 +1,25 @@
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table tr {
+	background-color: #f8f8f8;
+}
+
+.table td,
+.table th {
+	padding: 6px;
+	border: 1px solid #ddd;
+}
+
+.table th {
+	background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+.no-radius {
+	border-radius: 0;
+}

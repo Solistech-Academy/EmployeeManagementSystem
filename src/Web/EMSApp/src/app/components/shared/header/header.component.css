@@ -1,0 +1,48 @@
+/* Navbar Brand */
+.navbar-brand {
+	transition: all 0.3s ease;
+}
+.nav-title {
+	color: #333;
+	font-weight: bold;
+}
+
+/* Navbar Link */
+.navbar-nav .nav-link {
+	transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+	color: #007bff;
+}
+
+/* Navbar Toggler Icon */
+.navbar-toggler-icon {
+	transition: all 0.3s ease;
+}
+
+/* Navbar Toggler Button */
+.navbar-toggler {
+	border: none;
+	outline: none;
+}
+.navbar-toggler:hover {
+	cursor: pointer;
+}
+
+/* Search Input */
+.search-input {
+	border-color: #333;
+	background-color: #f2f2f2;
+	color: #333;
+	transition: all 0.3s ease;
+}
+.search-input:focus {
+	background-color: #fff;
+}
+
+/* Search Button */
+.search-button {
+	border-color: #333;
+	color: #777474;
+	transition: all 0.3s ease;
+}
